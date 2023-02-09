@@ -1,6 +1,8 @@
 package com.lwitkowski.cafe.domain;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import static com.lwitkowski.cafe.domain.Tag.BEVERAGE;
@@ -8,6 +10,16 @@ import static com.lwitkowski.cafe.domain.Tag.SNACK;
 import static com.lwitkowski.cafe.domain.Tag.WITH_EXTRA;
 
 public class Menu {
+    
+    public static Order.Builder order(OrderItem... firstItems) {
+        return order(Arrays.asList(firstItems));
+    }
+    
+    public static Order.Builder order(List<OrderItem> firstItems) {
+        return new Order.Builder(Discount.beverageAndSnackGivesFreeExtra())
+                .and(firstItems);
+    }
+    
     public static OrderItem orangeJuice() {
         return new OrderItem("Orange juice", new BigDecimal("3.95"), BigDecimal.ZERO, Set.of(BEVERAGE));
     }

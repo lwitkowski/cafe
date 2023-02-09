@@ -6,7 +6,7 @@ import static com.lwitkowski.cafe.domain.Tag.WITH_EXTRA;
 
 public interface Discount {
 
-    void apply(Order order);
+    void apply(Order.Builder order);
 
     // Bonus discount: if a customer orders a beverage and a snack, one of the extra's is free.
     static Discount beverageAndSnackGivesFreeExtra() {

@@ -11,38 +11,38 @@ class OrderTest {
 
     @Test
     void emptyOrderShouldCostZero() {
-        assertEquals(BigDecimal.ZERO, new Order().totalPrice());
+        assertEquals(BigDecimal.ZERO, Menu.order().thatWillBeAll().totalPrice());
     }
 
     @Test
     void totalPriceShouldBeSumOfAllItemsPrices() {
-        var fullMenuPlease = new Order()
-                .and(Coffee.small())
+        var fullMenuPlease = Menu.order(Coffee.small())
                 .and(Menu.orangeJuice())
                 .and(Coffee.large())
                 .and(Menu.baconRoll())
-                .and(Coffee.medium());
+                .and(Coffee.medium())
+                .thatWillBeAll();
 
         assertEquals(new BigDecimal("17.45"), fullMenuPlease.totalPrice());
     }
 
     @Test
     void totalPriceShouldIncludeExtras() {
-        var twoSmallCoffeesPlease = new Order()
+        var twoSmallCoffeesPlease = Menu.order(Coffee.large().withExtraMilk())
                 .and(Coffee.small().withFoamedMilk().times(3))
-                .and(Coffee.large().withExtraMilk());
+                .thatWillBeAll();
 
         assertEquals(new BigDecimal("12.80"), twoSmallCoffeesPlease.totalPrice());
     }
 
     @Test
     void shouldPrintReceipt() {
-        var receipt = new Order()
-                .and(Coffee.small().twice())
+        var receipt = Menu.order(Coffee.small().twice())
                 .and(Coffee.large())
                 .and(Coffee.medium().withFoamedMilk())
                 .and(Menu.orangeJuice().times(3))
                 .and(Menu.baconRoll())
+                .thatWillBeAll()
                 .receipt();
 
         assertEquals("""
@@ -55,8 +55,9 @@ class OrderTest {
                          Orange juice                                   3.95
                          Orange juice                                   3.95
                          Bacon roll                                     4.50
+                         Snack+beverage discount                       -0.50
                         -----
-                        Total CHF:                                     28.35""",
+                        Total CHF:                                     27.85""",
                 receipt);
 
     }

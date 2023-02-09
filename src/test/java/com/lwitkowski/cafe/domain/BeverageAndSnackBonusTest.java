@@ -13,10 +13,9 @@ class BeverageAndSnackBonusTest {
     void beverageAndSnackShouldMakeExtraFree() {
         var priceWithSpecialRoastForFree = new BigDecimal("7.50");
 
-        var twoCoffeesAndBaconRoll = new Order()
-                .and(Coffee.medium().withSpecialRoast())
+        var twoCoffeesAndBaconRoll = Menu.order(Coffee.medium().withSpecialRoast())
                 .and(Menu.baconRoll())
-                .apply(Discount.beverageAndSnackGivesFreeExtra());
+                .thatWillBeAll();
         
         assertEquals(priceWithSpecialRoastForFree, twoCoffeesAndBaconRoll.totalPrice());
     }
@@ -26,12 +25,11 @@ class BeverageAndSnackBonusTest {
     void multipleBeverageAndSnackShouldMakeMultipleExtrasFree() {
         var priceWithAllExtrasForFree = new BigDecimal("15.50");
         
-        var twoExtrasForFree = new Order()
-                .and(Coffee.medium().withSpecialRoast())
+        var twoExtrasForFree = Menu.order(Coffee.medium().withSpecialRoast())
                 .and(Coffee.large().withFoamedMilk())
                 .and(Menu.baconRoll())
                 .and(Menu.baconRoll())
-                .apply(Discount.beverageAndSnackGivesFreeExtra());
+                .thatWillBeAll();
 
         assertEquals(priceWithAllExtrasForFree, twoExtrasForFree.totalPrice());
     }
