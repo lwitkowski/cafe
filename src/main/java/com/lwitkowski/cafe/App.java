@@ -1,16 +1,14 @@
 package com.lwitkowski.cafe;
 
-import com.lwitkowski.cafe.domain.Menu;
+import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
-        var order = Menu.order(Menu.Coffee.small().twice())
-                .and(Menu.Coffee.large())
-                .and(Menu.Coffee.medium().withFoamedMilk())
-                .and(Menu.orangeJuice().times(3))
-                .and(Menu.baconRoll())
-                .thatWillBeAll();
-
+        if (args.length != 1) {
+            System.err.println("Invalid arguments, will exit now. Args: " + Arrays.asList(args));
+            System.exit(-1);
+        }
+        var order = OrderParser.parse(args[0]).thatWillBeAll();
         System.out.println(order.receipt());
     }
 }

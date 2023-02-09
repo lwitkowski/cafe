@@ -15,7 +15,7 @@ public final class StampCard {
         this.used = used;
         this.added = added;
     }
-    
+
     public static StampCard empty() {
         return fromPreviousPurchase(0);
     }

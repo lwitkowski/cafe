@@ -16,7 +16,7 @@ class BeverageAndSnackBonusTest {
         var twoCoffeesAndBaconRoll = Menu.order(Coffee.medium().withSpecialRoast())
                 .and(Menu.baconRoll())
                 .thatWillBeAll();
-        
+
         assertEquals(priceWithSpecialRoastForFree, twoCoffeesAndBaconRoll.totalPrice());
     }
 

@@ -47,6 +47,7 @@ class OrderTest {
                 .receipt();
 
         assertEquals("""
+                        ****************************************************
                         Order
                          Small coffee                                   2.50
                          Small coffee                                   2.50
@@ -62,7 +63,8 @@ class OrderTest {
                         -----
                         Total CHF:                                     19.95
                         -----
-                        Stamps: 6 (8 used, 5 added)""",
+                        Stamps: 6 (8 used, 5 added)
+                        ****************************************************""",
                 receipt);
 
     }

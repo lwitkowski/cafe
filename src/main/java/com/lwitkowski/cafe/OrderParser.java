@@ -10,15 +10,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 final class OrderParser {
-    
+
     private static final Pattern STAMPS_PATTERN = Pattern.compile("(\\d+) stamp");
-    
+
     private OrderParser() {
         // static util
     }
-    
+
     /**
      * Validates and parses input string into complete Order.
+     *
      * @param input Example: `large coffee with extra milk, orange juice, small coffee with special roast, bacon roll`
      * @throws IllegalArgumentException when input contains unknown or incorrect orders
      */
@@ -29,15 +30,15 @@ final class OrderParser {
         }
         return builder;
     }
-            
+
     private static void parseSingleItem(Order.Builder builder, String item) {
         Matcher stampsMatch = STAMPS_PATTERN.matcher(item);
-        if(stampsMatch.find()) {
+        if (stampsMatch.find()) {
             int stamps = Integer.parseInt(stampsMatch.group(1));
             builder.use(StampCard.fromPreviousPurchase(stamps));
             return;
         }
-        
+
         String[] itemWith = item.split(" with ", -1);
         String itemName = itemWith[0].trim();
         String extras = itemWith.length > 1 ? itemWith[1] : null;

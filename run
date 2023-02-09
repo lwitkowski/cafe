@@ -4,4 +4,4 @@ set -x
 set -e
 
 ./mvnw package -DskipTests
-java -jar target/cafe-1.0-SNAPSHOT.jar 'mein name ist Lukas'
+java -jar target/cafe.jar 'large coffee with extra milk, 2 stamps, orange juice, small coffee with special roast, bacon roll'

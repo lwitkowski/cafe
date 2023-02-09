@@ -21,13 +21,14 @@ public final class Order {
                 .map(OrderItem::totalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
-    
+
     public StampCard newStampCard() {
         return newStampCard;
     }
 
     public String receipt() {
         List<String> lines = new ArrayList<>();
+        lines.add("****************************************************");
         lines.add("Order");
         for (OrderItem item : items) {
             lines.add(" " + item.print());
@@ -35,9 +36,10 @@ public final class Order {
         lines.add("-----");
         lines.add("%-41s %10.2f".formatted("Total CHF: ", totalPrice()));
         lines.add("-----");
-        
+
         lines.add(newStampCard.print());
-        
+        lines.add("****************************************************");
+
         return String.join(System.lineSeparator(), lines);
     }
 
@@ -69,7 +71,7 @@ public final class Order {
             this.stampCard = stampCard;
             return this;
         }
-        
+
         public StampCard stampCard() {
             return stampCard;
         }
@@ -85,7 +87,7 @@ public final class Order {
             return items.stream()
                     .anyMatch(i -> i.equals(item));
         }
-        
+
         public Order thatWillBeAll() {
             StampCard newStampCard = stampCard.apply(this);
             activeDiscounts.forEach(discount -> discount.apply(this));
