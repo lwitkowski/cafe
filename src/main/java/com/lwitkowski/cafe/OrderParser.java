@@ -44,9 +44,9 @@ final class OrderParser {
         String extras = itemWith.length > 1 ? itemWith[1] : null;
 
         var orderItem = switch (itemName) {
-            case "small coffee" -> finalizeCoffee(Menu.Coffee.small(), extras);
-            case "medium coffee" -> finalizeCoffee(Menu.Coffee.medium(), extras);
-            case "large coffee" -> finalizeCoffee(Menu.Coffee.large(), extras);
+            case "small coffee" -> finalizeCoffee(Menu.coffee().small(), extras);
+            case "medium coffee" -> finalizeCoffee(Menu.coffee().medium(), extras);
+            case "large coffee" -> finalizeCoffee(Menu.coffee().large(), extras);
             case "bacon roll" -> ifExtrasNull(extras, Menu.baconRoll());
             case "orange juice" -> ifExtrasNull(extras, Menu.orangeJuice());
             default -> throw new IllegalArgumentException("Unknown item: " + item);

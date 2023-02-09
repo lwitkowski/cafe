@@ -10,6 +10,6 @@ class OrderItemTest {
     void printShouldHaveFixedLength() {
         assertEquals("Bacon roll                                     4.50", Menu.baconRoll().print());
         assertEquals("Orange juice                                   3.95", Menu.orangeJuice().print());
-        assertEquals("Medium coffee                                  3.00", Menu.Coffee.medium().print());
+        assertEquals("Medium coffee                                  3.00", Menu.coffee().medium().print());
     }
 }

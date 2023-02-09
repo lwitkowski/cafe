@@ -29,25 +29,33 @@ public class Menu {
     public static OrderItem baconRoll() {
         return new OrderItem("Bacon roll", new BigDecimal("4.50"), BigDecimal.ZERO, Set.of(SNACK));
     }
+    
+    public static CoffeeBuilder coffee() {
+        return new CoffeeBuilder();
+    }
+    
+    public static final class CoffeeBuilder {
+        
+        public Coffee small() {
+            return new Coffee("Small coffee", new BigDecimal("2.50"));
+        }
+
+        public Coffee medium() {
+            return new Coffee("Medium coffee", new BigDecimal("3.00"));
+        }
+
+        public Coffee large() {
+            return new Coffee("Large coffee", new BigDecimal("3.50"));
+        }
+
+    }
 
     public static final class Coffee extends OrderItem {
 
         private Coffee(String name, BigDecimal price) {
             super(name, price, BigDecimal.ZERO, Set.of(BEVERAGE));
         }
-
-        public static Coffee small() {
-            return new Coffee("Small coffee", new BigDecimal("2.50"));
-        }
-
-        public static Coffee medium() {
-            return new Coffee("Medium coffee", new BigDecimal("3.00"));
-        }
-
-        public static Coffee large() {
-            return new Coffee("Large coffee", new BigDecimal("3.50"));
-        }
-
+        
         public OrderItem withExtraMilk() {
             return new OrderItem(name + " (+extra milk)", basePrice, new BigDecimal("0.30"), Set.of(BEVERAGE, WITH_EXTRA));
         }

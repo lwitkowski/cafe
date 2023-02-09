@@ -1,6 +1,5 @@
 package com.lwitkowski.cafe.domain;
 
-import com.lwitkowski.cafe.domain.Menu.Coffee;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -13,7 +12,7 @@ class StampCardTest {
     void beverageShouldGenerateNewStamps() {
         var order = Menu.order(Menu.baconRoll())
                 .and(Menu.orangeJuice().twice())
-                .and(Coffee.large().withExtraMilk())
+                .and(Menu.coffee().large().withExtraMilk())
                 .use(StampCard.empty())
                 .thatWillBeAll();
 
@@ -27,8 +26,8 @@ class StampCardTest {
 
     @Test
     void fourStampsShouldDeductBasePriceOfMostExpensiveCaffee() {
-        var order = Menu.order(Coffee.small()) // generates 1 new stamp
-                .and(Coffee.large().withExtraMilk())
+        var order = Menu.order(Menu.coffee().small()) // generates 1 new stamp
+                .and(Menu.coffee().large().withExtraMilk())
                 .use(StampCard.fromPreviousPurchase(7)) // 3 stamps left for next Card
                 .thatWillBeAll(); // consumes 4 stamps
 
@@ -42,8 +41,8 @@ class StampCardTest {
 
     @Test
     void shouldUseStampsMultipleTimes() {
-        var order = Menu.order(Coffee.small())
-                .and(Coffee.large())
+        var order = Menu.order(Menu.coffee().small())
+                .and(Menu.coffee().large())
                 .use(StampCard.fromPreviousPurchase(8))
                 .thatWillBeAll();
 
@@ -57,8 +56,8 @@ class StampCardTest {
 
     @Test
     void shouldNotUseStampsAddedForNewBeverages() {
-        var order = Menu.order(Coffee.small().times(10))
-                .and(Coffee.large())
+        var order = Menu.order(Menu.coffee().small().times(10))
+                .and(Menu.coffee().large())
                 .thatWillBeAll();
 
         var newStamps = order.newStampCard();

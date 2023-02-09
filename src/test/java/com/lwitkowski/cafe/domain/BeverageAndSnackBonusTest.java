@@ -1,6 +1,5 @@
 package com.lwitkowski.cafe.domain;
 
-import com.lwitkowski.cafe.domain.Menu.Coffee;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -13,7 +12,7 @@ class BeverageAndSnackBonusTest {
     void beverageAndSnackShouldMakeExtraFree() {
         var priceWithSpecialRoastForFree = new BigDecimal("7.50");
 
-        var twoCoffeesAndBaconRoll = Menu.order(Coffee.medium().withSpecialRoast())
+        var twoCoffeesAndBaconRoll = Menu.order(Menu.coffee().medium().withSpecialRoast())
                 .and(Menu.baconRoll())
                 .thatWillBeAll();
 
@@ -25,8 +24,8 @@ class BeverageAndSnackBonusTest {
     void multipleBeverageAndSnackShouldMakeMultipleExtrasFree() {
         var priceWithAllExtrasForFree = new BigDecimal("15.50");
 
-        var twoExtrasForFree = Menu.order(Coffee.medium().withSpecialRoast())
-                .and(Coffee.large().withFoamedMilk())
+        var twoExtrasForFree = Menu.order(Menu.coffee().medium().withSpecialRoast())
+                .and(Menu.coffee().large().withFoamedMilk())
                 .and(Menu.baconRoll())
                 .and(Menu.baconRoll())
                 .thatWillBeAll();

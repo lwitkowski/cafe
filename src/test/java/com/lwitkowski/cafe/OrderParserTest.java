@@ -17,7 +17,7 @@ class OrderParserTest {
 
         Order.Builder order = OrderParser.parse(input);
 
-        assertTrue(order.contains(Menu.Coffee.large()));
+        assertTrue(order.contains(Menu.coffee().large()));
         assertEquals(order.stampCard().available(), 0);
     }
 
@@ -27,7 +27,7 @@ class OrderParserTest {
 
         Order.Builder order = OrderParser.parse(input);
 
-        assertTrue(order.contains(Menu.Coffee.medium().withFoamedMilk()));
+        assertTrue(order.contains(Menu.coffee().medium().withFoamedMilk()));
     }
 
     @Test
@@ -36,9 +36,9 @@ class OrderParserTest {
 
         Order.Builder order = OrderParser.parse(input);
 
-        assertTrue(order.contains(Menu.Coffee.large()));
-        assertTrue(order.contains(Menu.Coffee.small()));
-        assertFalse(order.contains(Menu.Coffee.medium()));
+        assertTrue(order.contains(Menu.coffee().large()));
+        assertTrue(order.contains(Menu.coffee().small()));
+        assertFalse(order.contains(Menu.coffee().medium()));
         assertEquals(order.stampCard().available(), 17);
     }
 
@@ -48,8 +48,8 @@ class OrderParserTest {
 
         Order.Builder order = OrderParser.parse(input);
 
-        assertTrue(order.contains(Menu.Coffee.large().withExtraMilk()));
-        assertTrue(order.contains(Menu.Coffee.small().withSpecialRoast()));
+        assertTrue(order.contains(Menu.coffee().large().withExtraMilk()));
+        assertTrue(order.contains(Menu.coffee().small().withSpecialRoast()));
         assertTrue(order.contains(Menu.baconRoll()));
         assertTrue(order.contains(Menu.orangeJuice()));
         assertEquals(order.stampCard().available(), 2);

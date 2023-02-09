@@ -1,6 +1,5 @@
 package com.lwitkowski.cafe.domain;
 
-import com.lwitkowski.cafe.domain.Menu.Coffee;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -16,11 +15,11 @@ class OrderTest {
 
     @Test
     void totalPriceShouldBeSumOfAllItemsPrices() {
-        var fullMenuPlease = Menu.order(Coffee.small())
+        var fullMenuPlease = Menu.order(Menu.coffee().small())
                 .and(Menu.orangeJuice())
-                .and(Coffee.large())
+                .and(Menu.coffee().large())
                 .and(Menu.baconRoll())
-                .and(Coffee.medium())
+                .and(Menu.coffee().medium())
                 .thatWillBeAll();
 
         assertEquals(new BigDecimal("17.45"), fullMenuPlease.totalPrice());
@@ -28,8 +27,8 @@ class OrderTest {
 
     @Test
     void totalPriceShouldIncludeExtras() {
-        var twoSmallCoffeesPlease = Menu.order(Coffee.large().withExtraMilk())
-                .and(Coffee.small().withFoamedMilk().times(3))
+        var twoSmallCoffeesPlease = Menu.order(Menu.coffee().large().withExtraMilk())
+                .and(Menu.coffee().small().withFoamedMilk().times(3))
                 .thatWillBeAll();
 
         assertEquals(new BigDecimal("12.80"), twoSmallCoffeesPlease.totalPrice());
@@ -37,9 +36,9 @@ class OrderTest {
 
     @Test
     void shouldPrintReceipt() {
-        var receipt = Menu.order(Coffee.small().twice())
-                .and(Coffee.large())
-                .and(Coffee.medium().withFoamedMilk())
+        var receipt = Menu.order(Menu.coffee().small().twice())
+                .and(Menu.coffee().large())
+                .and(Menu.coffee().medium().withFoamedMilk())
                 .and(Menu.orangeJuice().times(3))
                 .and(Menu.baconRoll())
                 .use(StampCard.fromPreviousPurchase(9))
