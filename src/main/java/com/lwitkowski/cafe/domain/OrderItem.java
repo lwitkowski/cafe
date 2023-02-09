@@ -37,7 +37,7 @@ public class OrderItem {
     public boolean isTaggedWith(Tag tag) {
         return tags.contains(tag);
     }
-    
+
     public List<OrderItem> times(int n) {
         OrderItem item = new OrderItem(name, basePrice, extraPrice, tags);
         return IntStream.range(0, n)

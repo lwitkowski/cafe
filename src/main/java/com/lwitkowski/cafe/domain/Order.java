@@ -36,7 +36,7 @@ public final class Order {
     public String toString() {
         return receipt();
     }
-    
+
     public static final class Builder {
         private final List<OrderItem> items = new ArrayList<>();
         private final List<Discount> activeDiscounts;

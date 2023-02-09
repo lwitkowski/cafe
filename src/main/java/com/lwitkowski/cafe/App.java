@@ -10,7 +10,7 @@ public class App {
                 .and(Menu.orangeJuice().times(3))
                 .and(Menu.baconRoll())
                 .thatWillBeAll();
-        
+
         System.out.println(order.receipt());
     }
 }
