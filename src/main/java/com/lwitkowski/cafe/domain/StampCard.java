@@ -1,7 +1,5 @@
 package com.lwitkowski.cafe.domain;
 
-import java.util.List;
-
 import static com.lwitkowski.cafe.domain.Tag.BEVERAGE;
 
 public final class StampCard {
@@ -38,7 +36,7 @@ public final class StampCard {
 
     // every 5th beverage is for free
     StampCard apply(Order.Builder builder) {
-        List<OrderItem> beverages = builder.itemsWithTagMostExpensiveFirst(BEVERAGE);
+        var beverages = builder.itemsWithTagMostExpensiveFirst(BEVERAGE);
         if (beverages.isEmpty()) {
             return this;
         }

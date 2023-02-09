@@ -40,7 +40,7 @@ public class OrderItem {
     }
 
     public List<OrderItem> times(int n) {
-        OrderItem item = new OrderItem(name, basePrice, extraPrice, tags);
+        var item = new OrderItem(name, basePrice, extraPrice, tags);
         return IntStream.range(0, n)
                 .mapToObj(i -> item)
                 .toList();

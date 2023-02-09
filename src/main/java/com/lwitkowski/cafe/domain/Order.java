@@ -89,7 +89,7 @@ public final class Order {
         }
 
         public Order thatWillBeAll() {
-            StampCard newStampCard = stampCard.apply(this);
+            var newStampCard = stampCard.apply(this);
             activeDiscounts.forEach(discount -> discount.apply(this));
             return new Order(items, newStampCard);
         }

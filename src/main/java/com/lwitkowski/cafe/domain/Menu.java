@@ -29,13 +29,13 @@ public class Menu {
     public static OrderItem baconRoll() {
         return new OrderItem("Bacon roll", new BigDecimal("4.50"), BigDecimal.ZERO, Set.of(SNACK));
     }
-    
+
     public static CoffeeBuilder coffee() {
         return new CoffeeBuilder();
     }
-    
+
     public static final class CoffeeBuilder {
-        
+
         public Coffee small() {
             return new Coffee("Small coffee", new BigDecimal("2.50"));
         }

@@ -6,7 +6,6 @@ import com.lwitkowski.cafe.domain.OrderItem;
 import com.lwitkowski.cafe.domain.StampCard;
 
 import java.util.Locale;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 final class OrderParser {
@@ -32,16 +31,16 @@ final class OrderParser {
     }
 
     private static void parseSingleItem(Order.Builder builder, String item) {
-        Matcher stampsMatch = STAMPS_PATTERN.matcher(item);
+        var stampsMatch = STAMPS_PATTERN.matcher(item);
         if (stampsMatch.find()) {
             int stamps = Integer.parseInt(stampsMatch.group(1));
             builder.use(StampCard.fromPreviousPurchase(stamps));
             return;
         }
 
-        String[] itemWith = item.split(" with ", -1);
-        String itemName = itemWith[0].trim();
-        String extras = itemWith.length > 1 ? itemWith[1] : null;
+        var itemWith = item.split(" with ", -1);
+        var itemName = itemWith[0].trim();
+        var extras = itemWith.length > 1 ? itemWith[1] : null;
 
         var orderItem = switch (itemName) {
             case "small coffee" -> finalizeCoffee(Menu.coffee().small(), extras);
