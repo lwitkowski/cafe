@@ -58,4 +58,7 @@ public final class StampCard {
         return new StampCard(availableLeft + added, used, added);
     }
 
+    public String print() {
+        return "Stamps: %d (%d used, %d added)".formatted(available, used, added);
+    }
 }

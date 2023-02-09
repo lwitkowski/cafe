@@ -42,6 +42,7 @@ class OrderTest {
                 .and(Coffee.medium().withFoamedMilk())
                 .and(Menu.orangeJuice().times(3))
                 .and(Menu.baconRoll())
+                .use(StampCard.fromPreviousPurchase(9))
                 .thatWillBeAll()
                 .receipt();
 
@@ -55,9 +56,13 @@ class OrderTest {
                          Orange juice                                   3.95
                          Orange juice                                   3.95
                          Bacon roll                                     4.50
+                         5th beverage for free                         -3.95
+                         5th beverage for free                         -3.95
                          Snack+beverage discount                       -0.50
                         -----
-                        Total CHF:                                     27.85""",
+                        Total CHF:                                     19.95
+                        -----
+                        Stamps: 6 (8 used, 5 added)""",
                 receipt);
 
     }

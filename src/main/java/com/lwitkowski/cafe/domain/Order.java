@@ -34,7 +34,10 @@ public final class Order {
         }
         lines.add("-----");
         lines.add("%-41s %10.2f".formatted("Total CHF: ", totalPrice()));
-
+        lines.add("-----");
+        
+        lines.add(newStampCard.print());
+        
         return String.join(System.lineSeparator(), lines);
     }
 
