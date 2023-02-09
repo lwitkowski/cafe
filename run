@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -x
+set -e
+
+./mvnw package -DskipTests
+java -jar target/cafe-1.0-SNAPSHOT.jar 'mein name ist Lukas'
