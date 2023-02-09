@@ -69,6 +69,10 @@ public final class Order {
             this.stampCard = stampCard;
             return this;
         }
+        
+        public StampCard stampCard() {
+            return stampCard;
+        }
 
         public List<OrderItem> itemsWithTagMostExpensiveFirst(Tag tag) {
             return items.stream()
@@ -77,10 +81,16 @@ public final class Order {
                     .toList();
         }
 
+        public boolean contains(OrderItem item) {
+            return items.stream()
+                    .anyMatch(i -> i.equals(item));
+        }
+        
         public Order thatWillBeAll() {
             StampCard newStampCard = stampCard.apply(this);
             activeDiscounts.forEach(discount -> discount.apply(this));
             return new Order(items, newStampCard);
         }
+
     }
 }

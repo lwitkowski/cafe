@@ -2,6 +2,7 @@ package com.lwitkowski.cafe.domain;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.IntStream;
 
@@ -56,5 +57,18 @@ public class OrderItem {
     @Override
     public String toString() {
         return print();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderItem orderItem = (OrderItem) o;
+        return name.equals(orderItem.name) && basePrice.equals(orderItem.basePrice) && extraPrice.equals(orderItem.extraPrice) && tags.equals(orderItem.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, basePrice, extraPrice, tags);
     }
 }
