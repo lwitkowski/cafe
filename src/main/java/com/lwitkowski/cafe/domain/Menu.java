@@ -11,12 +11,14 @@ import static com.lwitkowski.cafe.domain.Tag.WITH_EXTRA;
 
 public class Menu {
     
+    private static final List<Discount> ACTIVE_DISCOUNTS = List.of(Discount.beverageAndSnackGivesFreeExtra());
+    
     public static Order.Builder order(OrderItem... firstItems) {
         return order(Arrays.asList(firstItems));
     }
     
     public static Order.Builder order(List<OrderItem> firstItems) {
-        return new Order.Builder(Discount.beverageAndSnackGivesFreeExtra())
+        return new Order.Builder(ACTIVE_DISCOUNTS)
                 .and(firstItems);
     }
     

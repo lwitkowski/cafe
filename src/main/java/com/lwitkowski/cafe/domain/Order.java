@@ -2,7 +2,6 @@ package com.lwitkowski.cafe.domain;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -42,8 +41,8 @@ public final class Order {
         private final List<OrderItem> items = new ArrayList<>();
         private final List<Discount> activeDiscounts;
 
-        public Builder(Discount... activeDiscounts) {
-            this.activeDiscounts = Arrays.asList(activeDiscounts);
+        public Builder(List<Discount> activeDiscounts) {
+            this.activeDiscounts = Collections.unmodifiableList(activeDiscounts);
         }
 
         public Builder and(OrderItem item) {

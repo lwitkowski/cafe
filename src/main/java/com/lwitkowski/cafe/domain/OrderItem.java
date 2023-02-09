@@ -11,14 +11,14 @@ public class OrderItem {
     protected final BigDecimal extraPrice;
     protected final Set<Tag> tags;
 
-    public OrderItem(String name, BigDecimal basePrice, BigDecimal extraPrice, Set<Tag> tags) {
+    OrderItem(String name, BigDecimal basePrice, BigDecimal extraPrice, Set<Tag> tags) {
         this.name = name;
         this.basePrice = basePrice;
         this.extraPrice = extraPrice;
         this.tags = Set.copyOf(tags);
     }
 
-    public OrderItem(String name, BigDecimal price) {
+    OrderItem(String name, BigDecimal price) {
         this(name, price, BigDecimal.ZERO, Set.of());
     }
 
@@ -40,7 +40,9 @@ public class OrderItem {
     
     public List<OrderItem> times(int n) {
         OrderItem item = new OrderItem(name, basePrice, extraPrice, tags);
-        return IntStream.range(0, n).mapToObj(i -> item).toList();
+        return IntStream.range(0, n)
+                .mapToObj(i -> item)
+                .toList();
     }
 
     public List<OrderItem> twice() {
