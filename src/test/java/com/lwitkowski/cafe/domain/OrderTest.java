@@ -25,5 +25,30 @@ class OrderTest {
 
         assertEquals(new BigDecimal("17.45"), fullMenuPlease.totalPrice());
     }
+    
+    @Test
+    void shouldPrintReceipt() {
+        var receipt = new Order()
+                .and(Coffee.small().twice())
+                .and(Coffee.large())
+                .and(Coffee.medium())
+                .and(Menu.orangeJuice().times(3))
+                .and(Menu.baconRoll())
+                .receipt();
+        
+        assertEquals("""
+                    Order
+                     Small coffee                                   2.50
+                     Small coffee                                   2.50
+                     Large coffee                                   3.50
+                     Medium coffee                                  3.00
+                     Orange juice                                   3.95
+                     Orange juice                                   3.95
+                     Orange juice                                   3.95
+                     Bacon roll                                     4.50
+                    -----
+                    Total CHF:                                     27.85""", 
+                receipt);
 
+    }
 }
