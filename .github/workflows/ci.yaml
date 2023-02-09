@@ -29,5 +29,8 @@ jobs:
             ${{ runner.os }}-maven-
             ${{ runner.os }}-
 
+      - name: Static Code Analysis
+        run: ./mvnw clean compiler:compile compiler:testCompile spotbugs:check
+        
       - name: Unit Tests
-        run: ./mvnw test
+        run: ./mvnw verify
