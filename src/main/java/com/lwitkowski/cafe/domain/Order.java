@@ -6,17 +6,17 @@ import java.util.List;
 
 public class Order {
 
-    private List<Coffee> items = new ArrayList<>();
+    private final List<OrderItem> items = new ArrayList<>();
 
-    public Order add(Coffee coffee) {
-        this.items.add(coffee);
+    public Order and(OrderItem item) {
+        this.items.add(item);
         return this;
     }
-    
+
     public BigDecimal totalPrice() {
         return items
                 .stream()
-                .map(Coffee::price)
+                .map(OrderItem::price)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

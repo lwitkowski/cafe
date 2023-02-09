@@ -1,5 +1,6 @@
 package com.lwitkowski.cafe.domain;
 
+import com.lwitkowski.cafe.domain.Menu.Coffee;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -15,11 +16,14 @@ class OrderTest {
     
     @Test
     void totalPriceShouldBeSumOfAllItemsPrices() {
-        var twoCoffeesPlease = new Order()
-                .add(Coffee.small())
-                .add(Coffee.large());
+        var fullMenuPlease = new Order()
+                .and(Coffee.small())
+                .and(Menu.orangeJuice())
+                .and(Coffee.large())
+                .and(Menu.baconRoll())
+                .and(Coffee.medium());
 
-        assertEquals(new BigDecimal("6.00"), twoCoffeesPlease.totalPrice());
+        assertEquals(new BigDecimal("17.45"), fullMenuPlease.totalPrice());
     }
 
 }
