@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-          
+
       - name: Cache local Maven repository
         uses: actions/cache@v3
         with:
@@ -30,6 +30,6 @@ jobs:
 
       - name: Static Code Analysis
         run: ./mvnw clean compiler:compile compiler:testCompile spotbugs:check
-        
+
       - name: Unit Tests
         run: ./mvnw verify

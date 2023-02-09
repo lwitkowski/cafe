@@ -12,7 +12,7 @@ public class Order {
         this.items.add(item);
         return this;
     }
-    
+
     public Order and(List<OrderItem> items) {
         this.items.addAll(items);
         return this;
@@ -21,7 +21,7 @@ public class Order {
     public BigDecimal totalPrice() {
         return items
                 .stream()
-                .map(OrderItem::price)
+                .map(OrderItem::totalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
@@ -33,7 +33,7 @@ public class Order {
         }
         lines.add("-----");
         lines.add("%-41s %10.2f".formatted("Total CHF: ", totalPrice()));
-        
+
         return String.join(System.lineSeparator(), lines);
     }
 

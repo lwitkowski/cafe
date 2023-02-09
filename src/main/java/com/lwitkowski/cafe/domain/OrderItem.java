@@ -6,19 +6,25 @@ import java.util.stream.IntStream;
 
 public class OrderItem {
     protected final String name;
-    protected final BigDecimal price;
+    protected final BigDecimal basePrice;
+    protected final BigDecimal extraPrice;
+
+    public OrderItem(String name, BigDecimal basePrice, BigDecimal extraPrice) {
+        this.name = name;
+        this.basePrice = basePrice;
+        this.extraPrice = extraPrice;
+    }
 
     public OrderItem(String name, BigDecimal price) {
-        this.name = name;
-        this.price = price;
+        this(name, price, BigDecimal.ZERO);
     }
 
-    public BigDecimal price() {
-        return this.price;
+    public BigDecimal totalPrice() {
+        return basePrice.add(extraPrice);
     }
-    
+
     public List<OrderItem> times(int n) {
-        OrderItem item = new OrderItem(name, price);
+        OrderItem item = new OrderItem(name, basePrice, extraPrice);
         return IntStream.range(0, n).mapToObj(i -> item).toList();
     }
 
@@ -27,7 +33,7 @@ public class OrderItem {
     }
 
     public String print() {
-        return "%-40s %10.2f".formatted(name, price());
+        return "%-40s %10.2f".formatted(name, totalPrice());
     }
 
     @Override
