@@ -2,29 +2,44 @@ package com.lwitkowski.cafe.domain;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class OrderItem {
     protected final String name;
     protected final BigDecimal basePrice;
     protected final BigDecimal extraPrice;
+    protected final Set<Tag> tags;
 
-    public OrderItem(String name, BigDecimal basePrice, BigDecimal extraPrice) {
+    public OrderItem(String name, BigDecimal basePrice, BigDecimal extraPrice, Set<Tag> tags) {
         this.name = name;
         this.basePrice = basePrice;
         this.extraPrice = extraPrice;
+        this.tags = Set.copyOf(tags);
     }
 
     public OrderItem(String name, BigDecimal price) {
-        this(name, price, BigDecimal.ZERO);
+        this(name, price, BigDecimal.ZERO, Set.of());
+    }
+
+    public BigDecimal basePrice() {
+        return this.basePrice;
+    }
+
+    public BigDecimal extraPrice() {
+        return this.extraPrice;
     }
 
     public BigDecimal totalPrice() {
         return basePrice.add(extraPrice);
     }
 
+    public boolean isTaggedWith(Tag tag) {
+        return tags.contains(tag);
+    }
+    
     public List<OrderItem> times(int n) {
-        OrderItem item = new OrderItem(name, basePrice, extraPrice);
+        OrderItem item = new OrderItem(name, basePrice, extraPrice, tags);
         return IntStream.range(0, n).mapToObj(i -> item).toList();
     }
 
