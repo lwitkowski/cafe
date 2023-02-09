@@ -37,7 +37,7 @@ public final class StampCard {
     }
 
     // every 5th beverage is for free
-    public StampCard apply(Order.Builder builder) {
+    StampCard apply(Order.Builder builder) {
         List<OrderItem> beverages = builder.itemsWithTagMostExpensiveFirst(BEVERAGE);
         if (beverages.isEmpty()) {
             return this;

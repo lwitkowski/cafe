@@ -8,9 +8,11 @@ import java.util.List;
 
 public final class Order {
     private final List<OrderItem> items;
+    private final StampCard newStampCard;
 
-    private Order(List<OrderItem> items) {
+    private Order(List<OrderItem> items, StampCard newStampCard) {
         this.items = Collections.unmodifiableList(items);
+        this.newStampCard = newStampCard;
     }
 
     public BigDecimal totalPrice() {
@@ -18,6 +20,10 @@ public final class Order {
                 .stream()
                 .map(OrderItem::totalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+    
+    public StampCard newStampCard() {
+        return newStampCard;
     }
 
     public String receipt() {
@@ -40,6 +46,7 @@ public final class Order {
     public static final class Builder {
         private final List<OrderItem> items = new ArrayList<>();
         private final List<Discount> activeDiscounts;
+        private StampCard stampCard = StampCard.empty();
 
         public Builder(List<Discount> activeDiscounts) {
             this.activeDiscounts = Collections.unmodifiableList(activeDiscounts);
@@ -55,6 +62,11 @@ public final class Order {
             return this;
         }
 
+        public Builder use(StampCard stampCard) {
+            this.stampCard = stampCard;
+            return this;
+        }
+
         public List<OrderItem> itemsWithTagMostExpensiveFirst(Tag tag) {
             return items.stream()
                     .filter(item -> item.isTaggedWith(tag))
@@ -63,8 +75,9 @@ public final class Order {
         }
 
         public Order thatWillBeAll() {
+            StampCard newStampCard = stampCard.apply(this);
             activeDiscounts.forEach(discount -> discount.apply(this));
-            return new Order(items);
+            return new Order(items, newStampCard);
         }
     }
 }
