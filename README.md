@@ -1,4 +1,5 @@
-Cafe
+# Cafe
+Order anything you want. Anything at all.
 
 # Development
 ## Prerequisites
@@ -6,4 +7,4 @@ Cafe
 
 ## CLI
 - `./mvnw clean verify` - runs all tests
-- `./run"` - compiles and runs the app
+- `./run"` - compiles and runs the app with sample order input
